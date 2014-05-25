@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140510092752) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "carts", force: true do |t|
     t.integer  "user"
     t.integer  "item"
@@ -23,23 +26,19 @@ ActiveRecord::Schema.define(version: 20140510092752) do
 
   create_table "products", force: true do |t|
     t.string   "category"
-    t.string   "sub_category"
     t.string   "name"
     t.string   "pic"
     t.decimal  "price"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "products", ["user_id"], name: "index_products_on_user_id"
-
   create_table "users", force: true do |t|
     t.string   "username"
     t.string   "password"
+    t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role"
   end
 
 end

@@ -2,12 +2,12 @@
 <%= form_for :checkouts,  url: checkouts_path do |f| %>
 	<p>
   <%= label_tag(:card, "Card number:") %><br/>
-  <%= text_field :card , name:'card' %>
+  <%= password_field :card , name:'card' %>
 </p>
 
 <p>
   <%= label_tag(:id_no, "ID number:") %><br/>
-  <%= text_field :id_no , name:'id_no' %>
+  <%= password_field :id_no , name:'id_no' %>
 </p>
 	  <%= f.hidden_field :user, :value => session[:current_user_id] %>
 	  <%= f.hidden_field :amount, :value => session[:total] %>

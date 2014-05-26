@@ -23,6 +23,8 @@
 	<%end%>
 	</td>
 	</tr>
+<%end%>
+<%if session[:total] > 0%>
 <tr>
 <td>
 </td>
@@ -35,7 +37,6 @@
 <%= link_to 'Checkout', checkouts_path %>
 </td>
 </tr>
-</table>
 <%end%>
-<br/>
+</table>
 

@@ -14,6 +14,8 @@
           <% if session[:role] == 'admin' %>
               <%= link_to 'Edit', edit_product_path(product)+"?edit=product" %>
               <%= link_to 'Delete', product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %>
+		  <%else%>
+		  <%= link_to 'Add to cart', 'cart/?item='+product.id.to_s %>
           <% end %>
       <% end %>
       <br/>
@@ -39,7 +41,7 @@
                   <%= link_to 'Edit', edit_product_path(product)+"?edit=product" %>
                   <%= link_to 'Delete', product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %>
               <% else %>
-                  <%= link_to 'Add to cart', '?item='+product.id.to_s %>
+                  <%= link_to 'Add to cart', 'cart/?item='+product.id.to_s %>
               <% end %>
           <% end %>
           <br/>

@@ -13,6 +13,12 @@
  */
 body{}
 
+#plus a{font-weight:bold;font-family:calibri}
+
+#minus a{font-size:22px; font-weight:normal;font-family:calibri}
+
+a{text-decoration: none}
+
 .menu {}
 
 .menu a{text-decoration: none}

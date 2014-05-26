@@ -1,5 +1,41 @@
-<div class="title">Cart:
-<%=Cart.where("user = ?", session[:current_user_id]).count %>
+<div class="title" style="min-width:300px;max-width:300px;">Cart:
+<%=Cart.select(:item).distinct.where(user:session[:current_user_id], status: "oncart").count %>
 </div>
-<% Cart.where("user = ?", session[:current_user_id]).each do |product| %>
-<% end%>
+<table border='0'>
+<%Cart.select(:item).distinct.where(user:session[:current_user_id], status: "oncart").each  do |cart| %>
+	<% if cart.item != 0 %>
+	<% session[:total] = session[:total] + (Product.find(cart.item).price * Cart.where(user:session[:current_user_id], status: "oncart",item: cart.item).count)%>
+	<tr>
+	<td>
+	<%=Cart.where(user:session[:current_user_id], status: "oncart",item: cart.item).count %> X
+	</td>
+	<td>
+	<%=Product.find(cart.item).name%>
+	</td>
+	<td>
+	@R<%=(Product.find(cart.item).price * Cart.where(user:session[:current_user_id], status: "oncart",item: cart.item).count)%>
+	</td>
+	<td>
+	<b id='minus'><%= link_to '+', '?item='+Product.find(cart.item).id.to_s %></b>
+	<%Cart.select(:id).where(user:session[:current_user_id], status: "oncart", item:cart.item).limit(1).each  do |cart| %>
+	<b id='minus'><%= link_to '-', '?minus='+cart.id.to_s %></b>
+	<%end%>
+	<%end%>
+	</td>
+	</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td>
+@R<%=session[:total] %>
+</td>
+<td>
+<%= link_to 'Checkout', checkouts_path %>
+</td>
+</tr>
+</table>
+<%end%>
+<br/>
+

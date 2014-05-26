@@ -32,6 +32,17 @@
            </tr>
           </table>
         <div class="catalogue"><%= link_to 'Home:', root_path %> <%= link_to 'Skin Care', root_path+"?q=Skin Care" %> <%= link_to 'Personal Cleanliness', root_path+"?q=Personal Cleanliness" %>  <%= link_to 'Nail Preparations', root_path+"?q=Nail Preparations" %></div>
+		<table border='0' width='100%'>
+		<tr>
+		<td align='right'>
+		<% if session[:current_user_id].nil? %>
+		Cart:<%=Cart.select(:item).distinct.where(user:session[:current_user_id], status: "oncart").count %>
+		<%else%>
+		<%= link_to 'Cart:'+Cart.select(:item).distinct.where(user:session[:current_user_id], status: "oncart").count.to_s, root_path+"cart" %>
+		<%end%>
+		</td>
+		</tr>
+		</table>
         <div class="content"><%= yield %></div>
         <div class="foot"><br/></div>
     </td>

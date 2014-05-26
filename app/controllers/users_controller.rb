@@ -31,6 +31,16 @@ class UsersController < ApplicationController
       end
     end
   end
+   def edit
+    @user = User.find(session[:current_user_id])
+  end
+  def update
+	@user = User.find(params[:id])
+	@user.update(:username => params[:username])
+    @user.update(:password => params[:password])
+	set_session_user
+	render "show"
+  end
   private
   def set_session_user
     session[:current_user_id] = @user.id
